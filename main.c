@@ -6,8 +6,21 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/12 16:20:52 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:30:39 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include
+#include "libft.h"
+#include <stdio.h>
+
+/*
+int		get_next_line(const int fd, char **line)
+{
+
+}
+*/
+int	main()
+{
+	ft_putstr("hello");
+	return (0);
+}
