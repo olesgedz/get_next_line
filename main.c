@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/14 17:31:55 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:06:47 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int		get_next_line(const int fd, char **line)
 	lst = ft_lstnew(buf, ret);
 	ret = read(fd, buf, BUF_SIZE);
 	lst->content = ft_memccpy(lst->content, buf, '\n', ret);
-	((char *)(lst->content))[15] = '\0';
-	printf("%s", lst->content);
-	//ft_memccpy(lst->content, buf, '\n', ret);
-	//ft_putstr(lst->content);
+
+	ft_putstr(line);
 	return (0);
 }
 
