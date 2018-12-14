@@ -16,13 +16,14 @@ SRC= *.c
 
 OBJ=$(SRC:.c=.o)
 
-all: $(CC) $(CFLAGS) $(SRC) libft.a 
+all:
+	gcc main.c libft.a
 
 clean:
 	$(RM) $(OBJ)
 
 main:
-	(gcc -c -Wall -Werror -Wextra *.c *.a)
+	gcc main.c libft.a
 fclean: clean
 	$(RM) $(NAME)
 

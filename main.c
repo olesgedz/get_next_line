@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/13 21:21:57 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/14 17:31:55 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,36 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 1
+#define BUF_SIZE 10
 
+int		ft_check_buff(char *buf, int ret)
+{
+	int i;
 
+	i = 0;
+	while (i < ret)
+	{
+		if (buf[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 int		get_next_line(const int fd, char **line)
 {
 	int		ret;
 	char	buf[BUF_SIZE + 1];
+	static t_list *lst;
 
-	while ((ret = read(fd, buf, BUF_SIZE)))
-	{
-		if (buf[0] == '\n')
-		{
-			return (0);
-		}
-		buf[ret] = '\0';
-		ft_putstr(buf);
-	}
+	lst = malloc((sizeof(t_list)));
+	ret = read(fd, buf, BUF_SIZE);
+	lst = ft_lstnew(buf, ret);
+	ret = read(fd, buf, BUF_SIZE);
+	lst->content = ft_memccpy(lst->content, buf, '\n', ret);
+	((char *)(lst->content))[15] = '\0';
+	printf("%s", lst->content);
+	//ft_memccpy(lst->content, buf, '\n', ret);
+	//ft_putstr(lst->content);
 	return (0);
 }
 
@@ -41,9 +54,9 @@ int		main(int argc, char **argv)
 	int		fd;
 	char **a;
 
-	//fd = open(argv[1], O_RDONLY);
-	//get_next_line(fd, a);
-	//get_next_line(fd, a);
-	printf("%d", ft_atoi(" 0 1"));
+	fd = open(argv[1], O_RDONLY);
+	get_next_line(fd, a);
+	get_next_line(fd, a);
+
 	return (0);
 }
