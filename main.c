@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/14 22:06:47 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/16 18:29:22 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 10
+#define BUF_SIZE 100
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -39,11 +39,7 @@ int		get_next_line(const int fd, char **line)
 
 	lst = malloc((sizeof(t_list)));
 	ret = read(fd, buf, BUF_SIZE);
-	lst = ft_lstnew(buf, ret);
-	ret = read(fd, buf, BUF_SIZE);
-	lst->content = ft_memccpy(lst->content, buf, '\n', ret);
-
-	ft_putstr(line);
+	ft_putstr(lst->content);
 	return (0);
 }
 
@@ -55,6 +51,5 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, a);
 	get_next_line(fd, a);
-
 	return (0);
 }
