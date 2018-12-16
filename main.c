@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/16 21:00:24 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/16 21:09:24 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,25 @@ int		get_next_line(const int fd, char **line)
 	lst = malloc(sizeof(t_list));
 	ret = read(fd, buf, BUF_SIZE);
 	buf[ret] = '\0';
-	ft_putstr(buf);
-	lst->content = malloc(sizeof(ret * sizeof(char)));
+	lst->content = malloc(sizeof(sizeof(char) * (ret - 1)));
 	//*(char *)(lst->content) = 'L';
 	//printf("%c", *(char *)(lst->content));
-	//ft_memcpy((char *)lst->content, buf, ret - 1);
-	//ft_putstr(lst->content);
-	//*line = lst->content;
+	ft_memcpy((char *)lst->content, buf, ret + 1);
+	*line = lst->content;
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	int		fd;
-	char **a;
+	char *a;
 	if (argc != 2)
 	{
 		ft_putstr("ERROR");
-		return (NULL);
+		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, a);
-	//ft_putstr(*a);
+	get_next_line(fd, &a);
+	ft_putstr(a);
 	return (0);
 }
