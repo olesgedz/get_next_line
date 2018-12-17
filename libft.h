@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:41:19 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/16 18:28:18 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/17 01:38:21 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
+#define MALLOC_CHECK(x) if (!(x)) return (0)
 typedef struct		s_list
 {
 	void			*content;

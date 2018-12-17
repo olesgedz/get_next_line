@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/16 21:09:24 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/17 01:36:32 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		get_next_line(const int fd, char **line)
 	lst = malloc(sizeof(t_list));
 	ret = read(fd, buf, BUF_SIZE);
 	buf[ret] = '\0';
-	lst->content = malloc(sizeof(sizeof(char) * (ret - 1)));
+	MALLOC_CHECK(lst->content = malloc(sizeof(sizeof(char) * (ret - 1))));
 	//*(char *)(lst->content) = 'L';
 	//printf("%c", *(char *)(lst->content));
 	ft_memcpy((char *)lst->content, buf, ret + 1);
@@ -63,5 +63,8 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
 	ft_putstr(a);
+	int i =  0;
+	i = ~i;
+	printf("%d", i);
 	return (0);
 }
