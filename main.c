@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 17:31:15 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/19 17:55:58 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,19 @@ int		get_next_line(const int fd, char **line)
 	size_t i;
 	char* temp;
 	i = 0;
-	lst = malloc(sizeof(t_list));
 	ret = read(fd, buf, BUF_SIZE);
 	buf[ret] = '\0';
-	MALLOC_CHECK(lst->content = malloc(sizeof(sizeof(char) * (ret-5))));
+	if (!(lst))
+	{
+		lst = malloc(sizeof(t_list));
+		MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
+	}
 	//*(char *)(lst->content) = 'L';
 
 	//printf("%c", *(char *)(lst->content));
 	temp = ft_strjoin(temp, buf);
-	ft_putstr(temp);
-	ft_strcpy((char *)lst->content, )
+	ft_strcpy((char *)lst->content, temp);
+	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
 
@@ -68,8 +71,8 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	//ft_putendl(a);
-	get_next_line(fd, &a);
+	ft_putendl(a);
+	//get_next_line(fd, &a);
 	//ft_putstr(a);
 	return (0);
 }
