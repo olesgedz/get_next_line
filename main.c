@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 21:53:13 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/19 22:06:45 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ int		get_next_line(const int fd, char **line)
 	//free(temp);
 	*line = ft_strsub((char *)lst->content, 0,\
 		ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
+	//ft_putstr(lst->content);
+	lst->content = ft_strsub((char *)lst->content, ft_strchr((char *)lst->content, '\n') - (char *)lst->content - 5,\
+		ft_strchr((char *)lst->content, '\0') - (char *)lst->content);
 	return (0);
 }
 
@@ -74,9 +77,10 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	//fd = open(argv[1], O_RDONLY);
-	//get_next_line(fd, &a);
-	//get_next_line(fd, &a);
-	ft_putstr(a);
+	ft_putendl(a);
+	get_next_line(fd, &a);
+	ft_putendl(a);
+	get_next_line(fd, &a);
+	ft_putendl(a);
 	return (0);
 }
