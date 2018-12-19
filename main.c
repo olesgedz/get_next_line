@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 17:55:58 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:02:41 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,15 @@ int		get_next_line(const int fd, char **line)
 	//*(char *)(lst->content) = 'L';
 
 	//printf("%c", *(char *)(lst->content));
-	temp = ft_strjoin(temp, buf);
-	ft_strcpy((char *)lst->content, temp);
+	//temp = ft_strjoin(temp, buf);
+	while ((ret = read(fd, buf, BUF_SIZE)))
+	{
+		buf[ret] = '\0';
+		ft_strcpy((char *)lst->content, buf);
+		if (ft_strchr(buf, '\n'))
+			break ;
+	}
+
 	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
