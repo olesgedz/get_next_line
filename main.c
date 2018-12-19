@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 00:57:29 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/20 01:53:26 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int		get_next_line(const int fd, char **line)
 		if (!(lst->content))
 			MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
 		buf[ret] = '\0';
+		//ft_putendl((char *)lst->content);
 		lst->content = ft_strjoin((char *)lst->content, buf);
+		//ft_putendl((char *)lst->content);
 		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
 	}
@@ -58,11 +60,17 @@ int		get_next_line(const int fd, char **line)
 	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
+		//ft_putendl((char *)lst->content);
 	*line = ft_strsub((char *)lst->content, 0,\
 		ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
-	//ft_putstr(lst->content);
-	lst->content = ft_strsub((char *)lst->content, ft_strchr((char *)lst->content, '\n') - (char *)lst->content + 5,\
-		ft_strchr((char *)lst->content, '\0') - (char *)lst->content);
+		
+		ft_putendl(ft_strsub((char *)lst->content, 0,  ft_strchr((char *)lst->content, '\n') - (char *)lst->content));
+	lst->content = ft_strjoin(ft_strsub((char *)lst->content, 0,  ft_strchr((char *)lst->content, '\n') - (char *)lst->content), \
+	ft_strsub((char *)lst->content, ft_strchr((char *)lst->content, '\n') - (char *)lst->content,\
+	ft_strchr((char *)lst->content, '\0') - (char *)lst->content));
+
+
+	ft_putstr((char *)lst->content);
 	return (0);
 }
 
@@ -77,10 +85,10 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	ft_putendl(a);
+	//ft_putendl(a);
 	get_next_line(fd, &a);
-	ft_putendl(a);
+	//ft_putendl(a);
 	get_next_line(fd, &a);
-	ft_putendl(a);
+	//ft_putendl(a);
 	return (0);
 }
