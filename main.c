@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 20:15:10 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/19 21:07:08 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 10
+#define BUF_SIZE 30
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -51,19 +51,23 @@ int		get_next_line(const int fd, char **line)
 
 	//printf("%c", *(char *)(lst->content));
 	//temp = ft_strjoin(temp, buf);
+	i = 0;
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		buf[ret] = '\0';
-		ft_strcpy((char *)lst->content, buf);
-		if (ft_strchr(buf, '\n'))
+		temp = ft_strjoin((char *)lst->content, buf);
+		lst->content = temp;
+		printf("%zu %s", i, (char *)lst->content);
+		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
+		i++;
 	}
 
+	//ft_strcpy((char *)lst->content, temp);
 	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
-
-	*line = lst->content;
+	*line = (char *)lst->content;
 	return (0);
 }
 
