@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 21:07:08 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/19 21:44:17 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 30
+#define BUF_SIZE 1
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -37,34 +37,25 @@ int		get_next_line(const int fd, char **line)
 	int		ret;
 	char	buf[BUF_SIZE + 1];
 	static t_list *lst;
-	size_t i;
 	char* temp;
-	i = 0;
-	ret = read(fd, buf, BUF_SIZE);
-	buf[ret] = '\0';
-	if (!(lst))
-	{
-		lst = malloc(sizeof(t_list));
-		MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
-	}
+	MALLOC_CHECK(lst = ft_lstnew(NULL, 0));
+
 	//*(char *)(lst->content) = 'L';
 
 	//printf("%c", *(char *)(lst->content));
 	//temp = ft_strjoin(temp, buf);
-	i = 0;
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
+		if (!(lst->content))
+			MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
 		buf[ret] = '\0';
-		temp = ft_strjoin((char *)lst->content, buf);
-		lst->content = temp;
-		printf("%zu %s", i, (char *)lst->content);
+		lst->content = ft_strjoin((char *)lst->content, buf);
 		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
-		i++;
 	}
 
 	//ft_strcpy((char *)lst->content, temp);
-	//ft_putstr((char *)lst->content);
+	ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
 	*line = (char *)lst->content;
@@ -82,7 +73,8 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	ft_putendl(a);
+	fd = open(argv[1], O_RDONLY);
+	get_next_line(fd, &a);
 	//get_next_line(fd, &a);
 	//ft_putstr(a);
 	return (0);
