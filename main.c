@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/19 21:44:17 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/19 21:51:43 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 1
+#define BUF_SIZE 20
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -55,10 +55,11 @@ int		get_next_line(const int fd, char **line)
 	}
 
 	//ft_strcpy((char *)lst->content, temp);
-	ft_putstr((char *)lst->content);
+	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
-	*line = (char *)lst->content;
+	*line = ft_strsub((char *)lst->content, 0,\
+		ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
 	return (0);
 }
 
@@ -73,9 +74,9 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, &a);
+	//fd = open(argv[1], O_RDONLY);
 	//get_next_line(fd, &a);
-	//ft_putstr(a);
+	//get_next_line(fd, &a);
+	ft_putstr(a);
 	return (0);
 }
