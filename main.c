@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/17 01:36:32 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/19 17:31:15 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 100
+#define BUF_SIZE 10
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -38,15 +38,21 @@ int		get_next_line(const int fd, char **line)
 	char	buf[BUF_SIZE + 1];
 	static t_list *lst;
 	size_t i;
-
+	char* temp;
 	i = 0;
 	lst = malloc(sizeof(t_list));
 	ret = read(fd, buf, BUF_SIZE);
 	buf[ret] = '\0';
-	MALLOC_CHECK(lst->content = malloc(sizeof(sizeof(char) * (ret - 1))));
+	MALLOC_CHECK(lst->content = malloc(sizeof(sizeof(char) * (ret-5))));
 	//*(char *)(lst->content) = 'L';
+
 	//printf("%c", *(char *)(lst->content));
-	ft_memcpy((char *)lst->content, buf, ret + 1);
+	temp = ft_strjoin(temp, buf);
+	ft_putstr(temp);
+	ft_strcpy((char *)lst->content, )
+	//ft_strjoin((char *)lst->content, temp);
+	//free(temp);
+
 	*line = lst->content;
 	return (0);
 }
@@ -62,9 +68,8 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
-	ft_putstr(a);
-	int i =  0;
-	i = ~i;
-	printf("%d", i);
+	//ft_putendl(a);
+	get_next_line(fd, &a);
+	//ft_putstr(a);
 	return (0);
 }
