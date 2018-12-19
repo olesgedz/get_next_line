@@ -6,7 +6,11 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/12/19 19:22:59 by olesgedz         ###   ########.fr       */
+=======
+/*   Updated: 2018/12/19 22:10:41 by jblack-b         ###   ########.fr       */
+>>>>>>> ac46d551547a0f0c5298ef6381b27a5ad5dbc046
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 10
+#define BUF_SIZE 20
 
 int		ft_check_buff(char *buf, int ret)
 {
@@ -37,33 +41,32 @@ int		get_next_line(const int fd, char **line)
 	int		ret;
 	char	buf[BUF_SIZE + 1];
 	static t_list *lst;
-	size_t i;
 	char* temp;
-	i = 0;
-	ret = read(fd, buf, BUF_SIZE);
-	buf[ret] = '\0';
-	if (!(lst))
-	{
-		lst = malloc(sizeof(t_list));
-		MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
-	}
+	MALLOC_CHECK(lst = ft_lstnew(NULL, 0));
+
 	//*(char *)(lst->content) = 'L';
 
 	//printf("%c", *(char *)(lst->content));
 	//temp = ft_strjoin(temp, buf);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
+		if (!(lst->content))
+			MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
 		buf[ret] = '\0';
-		ft_strcpy((char *)lst->content, buf);
-		if (ft_strchr(buf, '\n'))
+		lst->content = ft_strjoin((char *)lst->content, buf);
+		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
 	}
 
+	//ft_strcpy((char *)lst->content, temp);
 	//ft_putstr((char *)lst->content);
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
-
-	*line = lst->content;
+	*line = ft_strsub((char *)lst->content, 0,\
+		ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
+	//ft_putstr(lst->content);
+	lst->content = ft_strsub((char *)lst->content, ft_strchr((char *)lst->content, '\n') - (char *)lst->content + 5,\
+		ft_strchr((char *)lst->content, '\0') - (char *)lst->content);
 	return (0);
 }
 
@@ -79,7 +82,9 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &a);
 	ft_putendl(a);
-	//get_next_line(fd, &a);
-	//ft_putstr(a);
+	get_next_line(fd, &a);
+	ft_putendl(a);
+	get_next_line(fd, &a);
+	ft_putendl(a);
 	return (0);
 }
