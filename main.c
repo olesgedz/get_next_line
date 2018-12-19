@@ -6,11 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/12/16 21:28:22 by jblack-b         ###   ########.fr       */
-=======
-/*   Updated: 2018/12/19 18:05:27 by olesgedz         ###   ########.fr       */
->>>>>>> 753f49f4374e444f8743f3906b34940e2d9fb0d9
+/*   Updated: 2018/12/19 20:15:10 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +50,6 @@ int		get_next_line(const int fd, char **line)
 	//*(char *)(lst->content) = 'L';
 
 	//printf("%c", *(char *)(lst->content));
-<<<<<<< HEAD
-	ft_memcpy((char *)lst->content, buf, ret + 1);
-	lst->content = ft_memchr((char *)lst->content, '\n', ret - 1) + 1;
-=======
 	//temp = ft_strjoin(temp, buf);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
@@ -71,7 +63,6 @@ int		get_next_line(const int fd, char **line)
 	//ft_strjoin((char *)lst->content, temp);
 	//free(temp);
 
->>>>>>> 753f49f4374e444f8743f3906b34940e2d9fb0d9
 	*line = lst->content;
 	return (0);
 }
