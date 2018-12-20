@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 21:38:13 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/20 21:43:14 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 int		get_next_line(const int fd, char **line)
 {
-	int				ret;
-	char			buf[BUF_SIZE + 1];
-	static		t_list *lst;
-	char			*temp;
-	int				i;
+	int						ret;
+	char					buf[BUF_SIZE + 1];
+	static				t_list *lst;
+	char				*temp;
+	int						i;
 
 	if (!lst)
 		MALLOC_CHECK(lst = ft_lstnew("", fd));
@@ -50,7 +50,8 @@ int		get_next_line(const int fd, char **line)
 int		main(int argc, char **argv)
 {
 	int		fd;
-	char *line;
+	char	*line;
+
 	if (argc != 2)
 	{
 		ft_putstr("ERROR");
