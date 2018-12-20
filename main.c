@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 21:29:28 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/20 21:38:13 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE 10000000
+#define BUF_SIZE 10
 
 int		get_next_line(const int fd, char **line)
 {
@@ -27,7 +27,7 @@ int		get_next_line(const int fd, char **line)
 	int				i;
 
 	if (!lst)
-		MALLOC_CHECK(lst = ft_lstnew(NULL, 0));
+		MALLOC_CHECK(lst = ft_lstnew("", fd));
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		if (!(lst->content))
