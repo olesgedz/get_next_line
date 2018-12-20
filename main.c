@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 21:43:14 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/20 21:53:24 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,36 @@
 
 #define BUF_SIZE 10
 
+static t_list			*get_correct_file(t_list **file, int fd)
+{
+	t_list				*tmp;
+
+	tmp = *file;
+	while (tmp)
+	{
+		if ((int)tmp->content_size == fd)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	tmp = ft_lstnew("\0", fd);
+	ft_lstadd(file, tmp);
+	tmp = *file;
+	return (tmp);
+}
+
 int		get_next_line(const int fd, char **line)
 {
 	int						ret;
 	char					buf[BUF_SIZE + 1];
-	static				t_list *lst;
-	char				*temp;
+	static				t_list *file;
+	t_list 							*lst;
 	int						i;
 
-	if (!lst)
-		MALLOC_CHECK(lst = ft_lstnew("", fd));
+	if ((fd < 0 || line == NULL || read(fd, buf, 0) < 0))
+		return (-1);
+	lst = get_correct_file(&file, fd);
+	/*if (!lst)
+		MALLOC_CHECK(lst = ft_lstnew("", fd));*/
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		if (!(lst->content))
@@ -50,18 +70,32 @@ int		get_next_line(const int fd, char **line)
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		fd2;
 	char	*line;
 
-	if (argc != 2)
+	if (argc < 2)
 	{
 		ft_putstr("ERROR");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line))
+	fd = open(argv[2], O_RDONLY);
+	get_next_line(fd, &line);
+		ft_putstr(line);
+	get_next_line(fd2, &line);
+		ft_putstr(line);
+		get_next_line(fd, &line);
+	ft_putstr(line);
+	get_next_line(fd2, &line);
+	ft_putstr(line);
+	get_next_line(fd, &line);
+	ft_putstr(line);
+	get_next_line(fd2, &line);
+	ft_putstr(line);
+	/*while (get_next_line(fd, &line))
 	{
 		ft_putstr(line);
 		ft_putstr("\n");
-	}
+	}*/
 	return (0);
 }
