@@ -6,19 +6,14 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:41:19 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 18:31:49 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/16 13:45:57 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
-
-#define MALLOC_CHECK(x) if (!(x)) exit (-1)
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <string.h>
-
+#define MALLOC_CHECK(x) if (!(x)) return (-1);
 typedef struct		s_list
 {
 	void			*content;
