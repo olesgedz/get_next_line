@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/20 19:31:38 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:37:41 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int		get_next_line(const int fd, char **line)
 	*line = ft_strsub((char *)lst->content, 0, ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
 	i = ft_strchr((char *)lst->content, '\n') - (char *)lst->content;
 	(i < (int)ft_strlen((char *)lst->content)) ? lst->content += (i + 1) : ft_strclr((char *)lst->content);
+	
+		return (-1);
 
-	return (1);
+	return(1);
 }
 
 int		main(int argc, char **argv)
