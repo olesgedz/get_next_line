@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/21 22:43:58 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/21 22:46:17 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ static t_list			*get_correct_file(t_list **file, int fd)
 	return (1);
 }*/
 
-t_list	*ft_getfile(t_list *file, int fd)
+t_list	*ft_getfile(t_list **file, int fd)
 {
 
-	if (!file)
-		MALLOC_CHECK_NULL(file = ft_lstnew("", fd));
-	while (file && file->content_size != fd)
-		file = file->next;
-	if (file->content_size != fd)
+	if (!*file)
+		MALLOC_CHECK_NULL(*file = ft_lstnew("", fd));
+	while (*file && (*file)->content_size != fd)
+		*file = (*file)->next;
+	if ((*file)->content_size != fd)
 	{
-		ft_lstadd(&file,  ft_lstnew("", fd));
-		file = file->next;
+		ft_lstadd(file,  ft_lstnew("", fd));
+		*file = (*file)->next;
 	}
-	return (file);
+	return (*file);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -96,9 +96,7 @@ int		get_next_line(const int fd, char **line)
 	if (fd < 0)
 		return (-1);
 
-	if (!file)
-		MALLOC_CHECK_INT(file = ft_lstnew("", fd));
-	lst = file;
+	lst = ft_getfile(&file, fd);
 	//lst = file;
 	/*if (!lst)
 		MALLOC_CHECK_INT(lst = ft_lstnew("", fd));
