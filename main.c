@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/21 20:58:53 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/21 22:23:45 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,42 @@ static t_list			*get_correct_file(t_list **file, int fd)
 	return (1);
 }*/
 
+t_list	*ft_getfile(t_list *file, int fd)
+{
+
+	if (!file)
+		MALLOC_CHECK_NULL(file = ft_lstnew("", fd));
+	while (file && file->content_size != fd)
+		file = file->next;
+	if (file->content_size != fd)
+	{
+		ft_lstadd(&file,  ft_lstnew("", fd));
+		//file = file->next;
+	}
+	return (file);
+}
 
 int		get_next_line(const int fd, char **line)
 {
 	int						ret;
-	char					buf[BUF_SIZE + 1];
+	char					*buf;
 	static				t_list *file;
-	char				*temp;
-	int						i;
+	int i;
 	t_list *lst;
 
-	if (!file)
-		MALLOC_CHECK(file = ft_lstnew("", fd));
-	lst = file;
+	if (!buf)
+		MALLOC_CHECK_INT(buf = malloc(sizeof(char *) * BUF_SIZE + 1));
+
+	if (fd < 0)
+		return (-1);
+
+	lst = ft_getfile(file, fd);
 	/*if (!lst)
 		MALLOC_CHECK(lst = ft_lstnew("", fd));*/
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		if (!(lst->content))
-			MALLOC_CHECK(lst->content = malloc(sizeof(char) * (ret + 1)));
+			MALLOC_CHECK_INT(lst->content = malloc(sizeof(char) * (ret + 1)));
 		buf[ret] = '\0';
 		lst->content = ft_strjoin((char *)lst->content, buf);
 		if (ft_strchr((char *)lst->content, '\n'))
@@ -115,12 +132,9 @@ if (argc < 2)
 	if (argc > 2)
 	{
 	fd = open(argv[1], O_RDONLY);
-	fd = open(argv[2], O_RDONLY);
+	fd2 = open(argv[2], O_RDONLY);
+	int a = fd;
 	get_next_line(fd, &line);
-		ft_putstr(line);
-	get_next_line(fd2, &line);
-		ft_putstr(line);
-		get_next_line(fd, &line);
 	ft_putstr(line);
 	get_next_line(fd2, &line);
 	ft_putstr(line);
@@ -128,7 +142,20 @@ if (argc < 2)
 	ft_putstr(line);
 	get_next_line(fd2, &line);
 	ft_putstr(line);
-}
+	get_next_line(fd, &line);
+	ft_putstr(line);
+	get_next_line(fd2, &line);
+	ft_putstr(line);
+	/*while (get_next_line(a, &line))
+	{
+		ft_putstr(line);
+		ft_putstr("\n");
+		if (a == fd)
+			a = fd2;
+		else
+			a = fd;
+	}*/
+	}
 else
 {
 	fd = open(argv[1], O_RDONLY);
