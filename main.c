@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/21 22:23:45 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/21 22:43:58 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list	*ft_getfile(t_list *file, int fd)
 	if (file->content_size != fd)
 	{
 		ft_lstadd(&file,  ft_lstnew("", fd));
-		//file = file->next;
+		file = file->next;
 	}
 	return (file);
 }
@@ -84,20 +84,25 @@ t_list	*ft_getfile(t_list *file, int fd)
 int		get_next_line(const int fd, char **line)
 {
 	int						ret;
-	char					*buf;
+	char					buf[BUF_SIZE + 1];
 	static				t_list *file;
-	int i;
 	t_list *lst;
+	int i;
+//	t_list *lst;
 
-	if (!buf)
-		MALLOC_CHECK_INT(buf = malloc(sizeof(char *) * BUF_SIZE + 1));
-
+/*	if (!buf)
+		MALLOC_CHECK_INT(buf = malloc(sizeof(char *) * BUF_SIZE + 1 // doent work
+*/
 	if (fd < 0)
 		return (-1);
 
-	lst = ft_getfile(file, fd);
+	if (!file)
+		MALLOC_CHECK_INT(file = ft_lstnew("", fd));
+	lst = file;
+	//lst = file;
 	/*if (!lst)
-		MALLOC_CHECK(lst = ft_lstnew("", fd));*/
+		MALLOC_CHECK_INT(lst = ft_lstnew("", fd));
+	*/
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		if (!(lst->content))
