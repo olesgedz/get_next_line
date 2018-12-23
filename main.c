@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 23:15:52 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/23 23:15:55 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/24 01:11:56 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ int		main(int argc, char **argv)
 	int		fd2;
 	int fd3;
 	char	*line;
-
+	fd = open(0, O_RDONLY);
+	while (get_next_line(fd, &line))
+	{
+		ft_putstr(line);
+		ft_putstr("\n");
+	}
+/*
 	if (argc < 2)
 	{
 		ft_putstr("ERROR");
@@ -71,14 +77,6 @@ int		main(int argc, char **argv)
 			ft_putstr("\n");
 		}
 	}
-	free(line);
-
-	static t_list *file;
-	t_list *temp;
-	temp = ft_getfile(&file, 1);
-	temp->content = ft_strjoin((char *)temp->content, "TEN");
-	temp = ft_getfile(&file, 4);
-	temp->content = ft_strjoin((char *)temp->content, "ELEVEN");
-	ft_lstprint(file);
+	free(line);*/
 	return (0);
 }
