@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/23 20:18:04 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/23 20:25:17 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		get_next_line(const int fd, char **line)
 	free(buf);
 	if (ret == 0 && !*(char *)lst->content)
 	{
-		//free(lst->content);
+		free(lst->content);
 		free(lst);
 		return (0);
 	}
@@ -185,5 +185,7 @@ else
 		ft_putstr("\n");
 	}
 }
+
+free(line);
 	return (0);
 }
