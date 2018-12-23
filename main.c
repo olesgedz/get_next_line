@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/21 22:51:10 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/23 20:18:04 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,21 @@ t_list	*ft_getfile(t_list **file, int fd)
 int		get_next_line(const int fd, char **line)
 {
 	int						ret;
-	char					buf[BUF_SIZE + 1];
+	//char					buf[BUF_SIZE + 1];
 	static				t_list *file;
 	t_list *lst;
 	int i;
+	char *temp;
+	char *temp2;
+	char *buf;
+
+	buf = malloc(BUF_SIZE + 1);
 //	t_list *lst;
 
 /*	if (!buf)
 		MALLOC_CHECK_INT(buf = malloc(sizeof(char *) * BUF_SIZE + 1 // doent work
 */
-	if (fd < 0)
+	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
 
 	lst = ft_getfile(&file, fd);
@@ -106,21 +111,29 @@ int		get_next_line(const int fd, char **line)
 		if (!(lst->content))
 			MALLOC_CHECK_INT(lst->content = malloc(sizeof(char) * (ret + 1)));
 		buf[ret] = '\0';
+		temp = (char *)lst->content;
 		lst->content = ft_strjoin((char *)lst->content, buf);
+		free(temp);
 		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
 	}
+	free(buf);
 	if (ret == 0 && !*(char *)lst->content)
 	{
-		free(file->content);
-		free(file);
+		//free(lst->content);
+		free(lst);
 		return (0);
 	}
+	temp2 = *line;
 	*line = ft_strsub((char *)lst->content, 0,\
 	ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
 	i = ft_strchr((char *)lst->content, '\n') - (char *)lst->content;
-	(i < (int)ft_strlen((char *)lst->content))\
-	? lst->content += (i + 1) : ft_strclr((char *)lst->content);
+	free(temp2);
+	temp2 =  lst->content;
+	//(i < (int)ft_strlen((char *)lst->content)) ? lst->content += (i + 1) : ft_strclr((char *)lst->content);
+	(i < (int)ft_strlen((char *)lst->content)) ?\
+	lst->content = ft_strdup((char *)lst->content + i + 1) : ft_strclr((char *)lst->content);
+	free(temp2);
 	return (1);
 }
 
