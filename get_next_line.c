@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/24 00:58:42 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/24 02:13:37 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int		get_next_line(const int fd, char **line)
 	int i;
 	char *temp;
 	char *buf;
-
+	
+	if (!line || fd < 0 || (buf[0] == '\0' && (!(buf = ft_strnew(0)))))
+		return (-1);
 	MALLOC_CHECK_INT(buf = malloc(BUFF_SIZE + 1));
 	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
