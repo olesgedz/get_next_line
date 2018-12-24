@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 23:15:52 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/24 02:15:13 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/24 19:01:48 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,8 @@ int		main(int argc, char **argv)
 	int		fd2;
 	int fd3;
 	char	*line;
-	fd = open(0, O_RDONLY);
-	//while (get_next_line(fd, &line))
-	//{
-		ft_putstr(line);
-		ft_putstr("\n");
-	//s}
-/*
+
+
 	if (argc < 2)
 	{
 		ft_putstr("ERROR");
@@ -77,6 +72,6 @@ int		main(int argc, char **argv)
 			ft_putstr("\n");
 		}
 	}
-	free(line);*/
+	free(line);
 	return (0);
 }
