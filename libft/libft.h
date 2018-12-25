@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:41:19 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/23 23:01:30 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:29:35 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 typedef struct		s_list
 {
 	void			*content;
-	int			content_size;
+	int				content_size;
 	struct s_list	*next;
 }					t_list;
 

@@ -6,10 +6,9 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 23:15:52 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/24 23:54:12 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:30:27 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft/libft.h"
 #include "get_next_line.h"
@@ -22,7 +21,6 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	int		fd2;
-	int fd3;
 	char	*line;
 
 	if (argc < 2)
@@ -34,33 +32,17 @@ int		main(int argc, char **argv)
 	{
 		fd = open(argv[1], O_RDONLY);
 		fd2 = open(argv[2], O_RDONLY);
-		fd3 =  open(argv[3], O_RDONLY);
-		//printf("%d, %d\n", fd, fd2);
-		get_next_line(fd3, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd2, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd2, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd3, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-		get_next_line(fd3, &line);
-		ft_putstr(line);
-		ft_putstr("\n");
-
+		int  i = fd;
+		while (get_next_line(i, &line))
+		{
+			ft_putstr(line);
+			free(line);
+			ft_putstr("\n");
+			if (i == fd)
+				i = fd2;
+			else
+				i = fd;
+		}
 	}
 	else
 	{
@@ -68,9 +50,9 @@ int		main(int argc, char **argv)
 		while (get_next_line(fd, &line))
 		{
 			ft_putstr(line);
+			free(line);
 			ft_putstr("\n");
 		}
 	}
-	free(line);
 	return (0);
 }

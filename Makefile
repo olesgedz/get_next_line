@@ -6,17 +6,17 @@
 #    By: arizzell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 18:51:38 by arizzell          #+#    #+#              #
-#    Updated: 2017/11/19 18:51:39 by arizzell         ###   ########.fr        #
+#    Updated: 2018/12/25 17:25:46 by jblack-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= gnl
+NAME= get_next_line
 
 SRC= main.c get_next_line.c
 OBJ= $(SRC:.c=.o)
 
-CC= gcc
-CFLAGS=
+CC= clang
+CFLAGS= -Wall -Wextra -Werror
 LIBFT= ./libft/libft.a
 LIBINC= -I./libft
 LIBLINK= -L./libft -lft
