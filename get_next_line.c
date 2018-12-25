@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/25 00:32:21 by olesgedz         ###   ########.fr       */
+/*   Updated: 2018/12/25 15:15:25 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ if (ft_strchr((char *)lst->content, '\n'))
 	*line = ft_strsub((char *)lst->content, 0,\
 	ft_strchr((char *)lst->content, '\n') - (char *)lst->content);
 	i = ft_strchr((char *)lst->content, '\n') - (char *)lst->content;
-	free(temp);
+	//free(temp);
 	temp = lst->content;
 	(i < (int)ft_strlen((char *)lst->content)) ? lst->content = \
 	ft_strdup((char *)lst->content + i + 1) : ft_strclr((char *)lst->content);
