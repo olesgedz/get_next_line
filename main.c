@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 23:15:52 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/25 21:31:17 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/26 01:39:08 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,75 @@ void		ft_lstdel_u(t_list **list)
 {
 	if (*list)
 	{
-		ft_strclr((char *)lst->content);
-		free(list->content);
-		
+		ft_strclr((char *)(*list)->content);
+		free((*list)->content);
+		(*list)->content = NULL;
 	}
+	free(*list);
 }
 
 void		ft_lstdelmid(t_list **begin, t_list **list)
 {
 	t_list *temp;
+	t_list *join;
 
 	temp = *begin;
-	while (temp->next)
+	if (temp != NULL && temp == &(**list))
+	{
+		*begin = (*begin)->next;
+
+	}else
+	{
+	while (temp != NULL && temp->next)
 	{
 		if (temp->next == &(**list))
 		{
-
+			join = temp->next->next;
+			ft_lstdel_u(&temp->next);
+			temp->next = join;
 		}
 		temp = temp->next;
 	}
+}
+	if (temp == NULL) return;
+}
+
+void deleteNode(t_list **head_ref, t_list **list)
+{
+    // Store head node
+    t_list *temp = *head_ref;
+		t_list *prev;
+
+    // If head node itself holds the key to be deleted
+    if (temp != NULL && temp->next == &(**list))
+    {
+        *head_ref = temp->next;   // Changed head
+        free(temp);               // free old head
+        return;
+    }
+    while (temp != NULL && temp->next != &(**list))
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp == NULL) return;
+    prev->next = temp->next;
+    free(temp);
 }
 
 int main()
 {
 	t_list *lst;
-
+	t_list * temp;
 	lst = ft_lstnew("hello", 6);
+	temp = lst;
 	ft_lstadd(&lst, ft_lstnew("darkness", 8));
 	t_list *a = ft_lstnew("my", 8);
 	ft_lstadd(&lst, a);
 	ft_lstadd(&lst, ft_lstnew("old", 8));
 	ft_lstadd(&lst, ft_lstnew("friend", 8));
-	//ft_lstprint(lst);
-	ft_lstdelmid(&lst, &a);
+	ft_lstdelmid(&lst, &temp);
+		ft_lstprint(lst);
 	return (0);
 }
 
