@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/25 17:34:31 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:45:53 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_getline(t_list *lst, char **line)
 		(i < ft_strlen((char *)lst->content)) ? lst->content = \
 		ft_strdup((char *)lst->content + i + 1)\
 		: ft_strclr((char *)lst->content);
-		free(temp);
+		ft_ptr_free(&temp);
 	}
 	else
 	{
@@ -80,11 +80,11 @@ int		get_next_line(const int fd, char **line)
 		buf[ret] = '\0';
 		temp = (char *)lst->content;
 		lst->content = ft_strjoin((char *)lst->content, buf);
-		free(temp);
+		ft_ptr_free(&temp);
 		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
 	}
-	free(buf);
+	ft_ptr_free(&buf);
 	if (ret < BUFF_SIZE && !ft_strlen((char *)lst->content))
 		return (0);
 	*line = ft_getline(lst, line);
