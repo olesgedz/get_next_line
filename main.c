@@ -3,35 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrameau <jrameau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 05:26:42 by jrameau           #+#    #+#             */
-/*   Updated: 2018/12/24 19:27:09 by olesgedz         ###   ########.fr       */
+/*   Created: 2018/12/23 23:15:52 by jblack-b          #+#    #+#             */
+/*   Updated: 2018/12/24 23:54:12 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <fcntl.h>
+
 #include "libft/libft.h"
+#include "get_next_line.h"
 #include <stdlib.h>
+#include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		fd2;
+	int fd3;
 	char	*line;
 
-	if (argc == 1)
-		fd = 0;
-	else if (argc == 2)
-		fd = open(argv[1], O_RDONLY);
-	else
-		return (2);
-	while (get_next_line(fd, &line) == 1)
+	if (argc < 2)
 	{
-		ft_putendl(line);
-		//free(line);
+		ft_putstr("ERROR");
+		return (0);
 	}
-	if (argc == 2)
-		close(fd);
+	if (argc > 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		fd2 = open(argv[2], O_RDONLY);
+		fd3 =  open(argv[3], O_RDONLY);
+		//printf("%d, %d\n", fd, fd2);
+		get_next_line(fd3, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd2, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd2, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd3, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+		get_next_line(fd3, &line);
+		ft_putstr(line);
+		ft_putstr("\n");
+
+	}
+	else
+	{
+		fd = open(argv[1], O_RDONLY);
+		while (get_next_line(fd, &line))
+		{
+			ft_putstr(line);
+			ft_putstr("\n");
+		}
+	}
+	free(line);
+	return (0);
 }
