@@ -6,11 +6,11 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/25 20:50:04 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/26 20:50:47 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft/includes/libft.h"
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>

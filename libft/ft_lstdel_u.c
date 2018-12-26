@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptr_free.c                                      :+:      :+:    :+:   */
+/*   ft_lstdel_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 17:40:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/26 20:30:48 by jblack-b         ###   ########.fr       */
+/*   Created: 2018/12/26 20:10:47 by jblack-b          #+#    #+#             */
+/*   Updated: 2018/12/26 20:12:53 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
-void		ft_ptr_free(char **ptr)
+void		ft_lstdel_u(t_list **list)
 {
-	free(*ptr);
-	*ptr = NULL;
+	if (*list)
+	{
+		ft_strclr((char *)(*list)->content);
+		free((*list)->content);
+		(*list)->content = NULL;
+	}
+	free(*list);
 }
