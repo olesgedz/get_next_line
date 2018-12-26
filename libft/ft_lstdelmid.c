@@ -6,7 +6,7 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 20:13:27 by jblack-b          #+#    #+#             */
-/*   Updated: 2018/12/26 20:47:30 by jblack-b         ###   ########.fr       */
+/*   Updated: 2018/12/26 23:40:34 by olesgedz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int		ft_lstdelmid(t_list **begin, t_list **list)
 	temp = *begin;
 	if (temp != NULL && temp == &(**list))
 	{
+		//join = *begin;
 		*begin = (*begin)->next;
+		//ft_lstdel_u(&join);
 	}
 	else
 	{
