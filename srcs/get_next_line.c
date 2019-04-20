@@ -6,11 +6,11 @@
 /*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
-/*   Updated: 2019/02/07 18:20:52 by jblack-b         ###   ########.fr       */
+/*   Updated: 2019/04/20 15:42:29 by jblack-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "libft.h"
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>
@@ -87,7 +87,6 @@ int		get_next_line(const int fd, char **line)
 	ft_ptr_free(&buf);
 	if (ret < BUFF_SIZE && !ft_strlen((char *)lst->content))
 		return (0);
-
 	*line = ft_getline(lst, line);
 	return (1);
 }
