@@ -6,7 +6,7 @@
 #    By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 18:51:38 by arizzell          #+#    #+#              #
-#    Updated: 2019/04/20 15:48:15 by jblack-b         ###   ########.fr        #
+#    Updated: 2019/04/20 15:49:52 by jblack-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 DIRECTORY =  $(shell pwd)
 
-SRCS_DIRECTORY = srcs/
+SRCS_DIRECTORY = ./
 SRCS_LIST = main.c get_next_line.c
 OBJS_DIRECTORY = objects/
 OBJS_LIST = $(patsubst %.c, %.o, $(SRCS_LIST))
