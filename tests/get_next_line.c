@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jblack-b <jblack-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/12 16:20:41 by jblack-b          #+#    #+#             */
+/*   Updated: 2019/04/20 15:42:29 by jblack-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 
-static t_list		*ft_getfile(t_list **file, int fd)
+t_list	*ft_getfile(t_list **file, int fd)
 {
 	t_list *tmp;
 
@@ -17,14 +29,14 @@ static t_list		*ft_getfile(t_list **file, int fd)
 		}
 		tmp = tmp->next;
 	}
-	if (!tmp && !(tmp = ft_lstnew("", fd)))
-		return (NULL);
+	if (!tmp)
+		MALLOC_CHECK_NULL(tmp = ft_lstnew("", fd));
 	ft_lstadd(file, tmp);
 	tmp = *file;
 	return (tmp);
 }
 
-static char			*ft_getline(t_list *lst, char **line)
+char	*ft_getline(t_list *lst, char **line)
 {
 	char	*temp;
 	size_t	i;
@@ -39,7 +51,7 @@ static char			*ft_getline(t_list *lst, char **line)
 		(i < ft_strlen((char *)lst->content)) ? lst->content = \
 		ft_strdup((char *)lst->content + i + 1)\
 		: ft_strclr((char *)lst->content);
-		ft_memdel((void **)&temp);
+		ft_ptr_free(&temp);
 	}
 	else
 	{
@@ -50,7 +62,7 @@ static char			*ft_getline(t_list *lst, char **line)
 	return (*line);
 }
 
-int					get_next_line(const int fd, char **line)
+int		get_next_line(const int fd, char **line)
 {
 	int				ret;
 	static	t_list	*file;
@@ -58,8 +70,8 @@ int					get_next_line(const int fd, char **line)
 	char			*temp;
 	char			*buf;
 
-	if(!(buf = malloc(BUFF_SIZE + 1)))
-		return (0);
+	buf = NULL;
+	MALLOC_CHECK_INT(buf = malloc(BUFF_SIZE + 1));
 	if (fd < 0 || !line || read(fd, buf, 0) < 0 || BUFF_SIZE < 1)
 		return (-1);
 	lst = ft_getfile(&file, fd);
@@ -68,11 +80,11 @@ int					get_next_line(const int fd, char **line)
 		buf[ret] = '\0';
 		temp = (char *)lst->content;
 		lst->content = ft_strjoin((char *)lst->content, buf);
-		ft_memdel((void **)&temp);
+		ft_ptr_free(&temp);
 		if (ft_strchr((char *)lst->content, '\n'))
 			break ;
 	}
-	ft_memdel((void **)&buf);
+	ft_ptr_free(&buf);
 	if (ret < BUFF_SIZE && !ft_strlen((char *)lst->content))
 		return (0);
 	*line = ft_getline(lst, line);
